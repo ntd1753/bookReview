@@ -12,7 +12,16 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/admin', [App\Http\Controllers\Admin\AdminController::class,'index']
+) -> name('admin.index');
+Route::prefix('admin')->group(function () {
+    Route::get('/category', [App\Http\Controllers\Admin\CategoryController::class,'index']
+    ) -> name('admin.category.index');
+    Route::get('/book', [App\Http\Controllers\Admin\BookController::class,'index']
+    ) -> name('admin.book.index');
 });
+
+
+
+
+
