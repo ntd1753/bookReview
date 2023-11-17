@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
-            $table->id();
-            $table->string('category_name');
-            $table->string('category_slug');
-            $table->bigInteger('category_parent_id')->nullable();
+        Schema::create('s_e_o_s', function (Blueprint $table) {
+            $table->unsignedBigInteger("review_id");
+            $table->string("seo_keyword");
+            $table->string("seo_title");
+            $table->string("seo_description");
+            $table->string("seo_script");
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('s_e_o_s');
     }
 };

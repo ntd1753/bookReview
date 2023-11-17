@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('seos', function (Blueprint $table) {
             $table->id();
-            $table->string('category_name');
-            $table->string('category_slug');
-            $table->bigInteger('category_parent_id')->nullable();
+            $table->bigInteger("review_id");
+            $table->text("seo_keyword")->nullable();
+            $table->text("seo_title")->nullable();
+            $table->text("seo_description")->nullable();
+            $table->text("seo_script")->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('seos');
     }
 };

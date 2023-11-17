@@ -1,5 +1,4 @@
 <div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
-    <!--left-fixed -navigation-->
     <aside class="sidebar-left">
         <nav class="navbar navbar-inverse">
             <div class="navbar-header">
@@ -101,11 +100,11 @@
                     <li class="header">LABELS</li>
                     <li><a href="#"><i class="fa fa-angle-right text-red"></i> <span>Important</span></a></li>
                     <li><a href="#"><i class="fa fa-angle-right text-yellow"></i> <span>Warning</span></a></li>
-                    <li><a href="#"><i class="fa fa-angle-right text-aqua"></i> <span>Information</span></a></li>
+                    <li><a href="{{route('admin.category.index')}}"><i class="fa fa-angle-right text-aqua"></i> <span>Category</span></a></li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
         </nav>
     </aside>
 </div>
-<!--left-fixed -navigation-->
+

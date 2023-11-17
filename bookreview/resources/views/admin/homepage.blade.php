@@ -1,7 +1,6 @@
 @extends("layout.adminLayoutPage")
 @section("content")
-    <div>
-        adminnn
-    </div>
+<div>
+    admin adsfadsfdsaf
+</div>
 @endsection
-

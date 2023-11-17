@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('category_name');
             $table->string('category_slug');
-            $table->bigInteger('category_parent_id')->nullable();
+            $table->bigInteger('category_parent_id')->nullable()->default(0);
             $table->timestamps();
         });
     }
