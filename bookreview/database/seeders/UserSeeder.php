@@ -16,14 +16,18 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-       /* DB::table('users')->insert([
+       DB::table('users')->insert([
             'name' => Str::random(10),
             'email' => Str::random(10).'@gmail.com',
             'password' => Hash::make('password'),
-        ]);*/
+//            'phone' => Str::random(10),
+//           'address' => Str::random(10),
+//           'avatar' => fake() -> imageUrl(),
+        ]);
+
 
         User::factory()
-            ->count(1)
+            ->count(15)
             ->create();
     }
 }

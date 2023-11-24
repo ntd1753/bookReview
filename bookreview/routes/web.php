@@ -3,7 +3,9 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Admin\ReviewController;
+use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,6 +33,26 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/edit/{id}', [CategoryController::class,'edit'])->name('admin.category.edit'); // Trả về form edit category
         Route::post('/edit/{id}', [CategoryController::class,'update'])->name('admin.category.update'); // Update category
         Route::get('/delete/{id}', [CategoryController::class,'destroy'])->name('admin.category.destroy'); // delete category
+    });
+    Route::group(['prefix' => 'review'], function (){
+        Route::get('/',[ReviewController::class,'index'])->name("admin.review.index"); // danh sách danh mục
+        Route::get('/add', [ReviewController::class,'add'])->name('admin.review.add'); // Trả về form thêm mới
+        Route::post('/add', [ReviewController::class,'store'])->name('admin.review.store'); // tạo mới category
+        Route::get('/edit/{review_id}', [ReviewController::class,'edit'])->name('admin.review.edit'); // Trả về form edit category
+        Route::post('/edit/{review_id}', [ReviewController::class,'update'])->name('admin.review.update'); // Update category
+        Route::get('/delete/{id}', [ReviewController::class,'destroy'])->name('admin.review.destroy'); // delete category
+    });
+    Route::group(['prefix' => 'menu'], function (){
+        Route::get('/',[MenuController::class,'index'])->name("admin.menu.index"); // danh sách danh mục
+        Route::get('/add', [MenuController::class,'add'])->name('admin.menu.add'); // Trả về form thêm mới
+        Route::post('/add', [MenuController::class,'store'])->name('admin.menu.store'); // tạo mới category
+        Route::get('/edit/{id}', [MenuController::class,'edit'])->name('admin.menu.edit'); // Trả về form edit category
+        Route::post('/edit/{id}', [MenuController::class,'update'])->name('admin.menu.update'); // Update category
+        Route::get('/delete/{id}', [MenuController::class,'destroy'])->name('admin.menu.destroy'); // delete category
+    });
+    Route::group(['prefix' => 'user'], function (){
+        Route::get('/',[UserController::class,'index'])->name("admin.user.index"); // danh sách danh mục
+        Route::get('/delete/{id}', [UserController::class,'destroy'])->name('admin.menu.destroy'); // delete category
     });
 });
 

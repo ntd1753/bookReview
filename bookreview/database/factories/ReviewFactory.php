@@ -17,9 +17,12 @@ class ReviewFactory extends Factory
     public function definition(): array
     {
         return [
-
-            'category_slug' => fake()->slug(),
-            'category_parent_id' => 0,
+            'name' => fake()->slug(),
+            'preview_image' => fake()->imageUrl(),
+            'content' => fake() ->text(),
+            'description' => fake() -> text(),
+            'user_id' => 1,
+            'category_id' => 1,
         ];
     }
 }

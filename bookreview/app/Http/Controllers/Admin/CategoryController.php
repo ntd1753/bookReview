@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\DB;
 class CategoryController extends Controller
 {
     public function index(){
-        $categories = Category::where('category_parent_id','=',0)->with('childs')->get();
-        return view("admin.content.category.index",["categories"=>$categories, ]);
+        $categories = Category::where('category_parent_id','=',0)->with('childs')->paginate(15);
+        return view("admin.content.category.index",["categories"=>$categories]);
     }
     public function add(){
         $categories = Category::where('category_parent_id','=',0)->with('childs')->get();
@@ -36,6 +36,7 @@ class CategoryController extends Controller
     }
     public function update(Request $request, $id){
         $item = Category::find($id);
+
         if($item){
             $input = $request->all();
             $item["category_name"] = $input["category_name"];

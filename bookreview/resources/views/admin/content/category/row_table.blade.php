@@ -1,13 +1,12 @@
 @foreach($categories as $item)
     <tr>
-        <th scope="row">{{$item->id }}</th>
-        <td>{{str_repeat("----", $level)}}  {{$item->category_name}}</td>
-        <td>{{$item->category_slug}}</td>
-
+        <td contenteditable="true">{{$item->id }}</td>
+        <td contenteditable="true">{{str_repeat("----", $level)}}  {{$item->category_name}}</td>
+        <td contenteditable="true">{{$item->category_slug}}</td>
         <td>
-            <a href="{{route('admin.category.edit',$item->id )}}">Sửa</a>
+            <a href="{{route('admin.category.edit',$item->id )}}"><button type="button" class="btn mb-3 btn-warning rounded-pill"><i class="ion-wrench"></i></button></a>
             <a href="{{route('admin.category.destroy',$item->id )}}"
-               onclick="return confirm('Bạn có muốn xóa không?');">Xóa</a>
+               onclick="return confirm('Bạn có muốn xóa không?');"><button type="button" class="btn mb-3 btn-danger"><i class="ion-trash-b"></i></button></a>
         </td>
     </tr>
     @if($item->childs)
