@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,7 +28,10 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/',[AdminController::class,'index'])->name("admin.index");
-
+    Route::get('/register',[RegisterController::class,'showAdminRegistrationForm'])->name("admin.auth.register");
+    Route::post('/register',[RegisterController::class,'storeAdminAccount'])->name("admin.auth.register.store");
+    Route::get('/login',[LoginController::class,'showAdminLoginForm'])->name("admin.auth.login");
+    Route::post('/login',[LoginController::class,'adminLogin'])->name("admin.auth.login.store");
     Route::group(['prefix' => 'category'], function () {
         Route::get('/',[CategoryController::class,'index'])->name("admin.category.index"); // danh sách danh mục
         Route::get('/add', [CategoryController::class,'add'])->name('admin.category.add'); // Trả về form thêm mới
@@ -52,7 +58,16 @@ Route::group(['prefix' => 'admin'], function () {
     });
     Route::group(['prefix' => 'user'], function (){
         Route::get('/',[UserController::class,'index'])->name("admin.user.index"); // danh sách danh mục
-        Route::get('/delete/{id}', [UserController::class,'destroy'])->name('admin.menu.destroy'); // delete category
+        //Route::get('/delete/{id}', [UserController::class,'destroy'])->name('admin.menu.destroy'); // delete category
     });
 });
 
+
+Auth::routes();
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/media', [HomeController::class, 'media'])->name('media');
+
+Route::get('/tinymce', function () {
+    return view('tinymce');
+});
