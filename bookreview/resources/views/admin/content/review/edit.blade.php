@@ -3,43 +3,84 @@
     <div class="iq-card">
         <div class="iq-card-header d-flex justify-content-between">
             <div class="iq-header-title">
-                <h4 class="card-title">Sửa bài viết</h4>
+                <h4 class="card-title">Thêm bài viết</h4>
             </div>
         </div>
         <div class="iq-card-body">
-            <form action="{{route("admin.review.edit",$item->id)}}" method="POST">
+            <form action="{{route("admin.review.update",$item->id)}}" method="POST">
                 <div class="form">
                     @csrf
-                    <div class="">
-                        <label for="reviewName">Tiêu đề bài viết</label>
-                        <input type="text" class="form-control" id="reviewName" name="name" placeholder="Nhập tiêu đề bài viết ..." value="{{$item->name}}">
+                    <div class="row row-cols-2 ">
+                        <div class="px-2">
+                            <label for="reviewName">Tiêu đề bài viết</label>
+                            <input type="text" class="form-control" id="reviewName" name="name" placeholder="Nhập tiêu đề bài viết ..." value="{{$item->name}}">
+                        </div>
+                        <div class="px-2">
+                            <label for="description">SEO title</label>
+                            <input type="text" class="form-control" id="description" name="seo_title" value="{{$seo->seo_title}}" >
+                        </div>
+                    </div>
+                    <div class="row row-cols-2">
+                        <div class="px-2">
+                            <label for="reviewName">slug bài viết</label>
+                            <input type="text" class="form-control" id="reviewName" name="slug" placeholder="Nhập tiêu đề bài viết ..." value="{{$item->slug}}">
+                        </div>
+                        <div class="px-2">
+
+                            <label for="reviewName">SEO  keyword</label>
+                            <input type="text" class="form-control" id="reviewName" name="seo_keywords" placeholder="Nhập tiêu đề bài viết ..." value="{{$seo->seo_keyword}}">
+                        </div>
+
+                    </div>
+                    <div class="row row-cols-2">
+                        <div class="px-2">
+                            <label for="description">mô tả</label>
+                            <textarea class="" id="content" name="description" name="description">{!! $item->description !!}</textarea>
+
+                        </div>
+                        <div class="px-2">
+                            <label for="content">SEO DES</label>
+                            <textarea id="Seo" name="seo_description">{!! $seo->seo_description !!}</textarea>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2">
+                        <div class="">
+                            <label for="content">Nội dung</label>
+                            <textarea id="content" class="tinyMce" name="content">{!! $item->content !!}</textarea>
+                        </div>
+
                     </div>
 
-                    <div class="">
-                        <label for="description">mô tả</label>
-                        <input type="text" class="form-control" id="description" name="description" placeholder="Nhập description....." value="{{$item ->description}}">
-                    </div>
-                    <div class="">
-                        <label for="content">Nội dung</label>
-                        <input type="text" class="form-control" id="content" name="content" placeholder="Nhập nội dung ....." value="{{$item -> content}}">
-                    </div>
-                    <div class="">
-                        <label for="validationDefault04">Danh mục</label>
-                        <select class="form-control" id="validationDefault04" name="category_id">
-                            <option value="0">Không có danh mục</option>
-                            @include('admin.content.review.category_selected_option', ["categories" =>$categories, 'level' => 0])
-                        </select>
-                    </div>
                     <div class="my-2">
                         <label for="preview-image">Chọn ảnh bài viết</label><br>
-                        <input type="text" class="form-control" id="preview_image" name="preview_image" placeholder="Nhập link ảnh ....." value="{{$item -> preview_image}}">
-                        {{--                        <input type="file" class="" id="preview-image" name="preview_image" placeholder="Nhập nội dung ....." >--}}
+                        <input type="text" id="image_label" class="form-control" name="image"
+                               aria-label="Image" aria-describedby="button-image" value="{{$item -> preview_image}}">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="button-image">Select</button>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-primary" type="submit">Submit form</button>
+                    <button class="btn btn-primary" type="submit"  onclick="return confirm('Bạn chắc không :))))');">Submit form</button>
                 </div>
             </form>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            document.getElementById('button-image').addEventListener('click', (event) => {
+                event.preventDefault();
+
+                window.open('/file-manager/fm-button', 'fm', 'width=1400,height=800');
+            });
+        });
+
+        // set file link
+        function fmSetLink($url) {
+// cấu hình link
+            document.getElementById('image_label').value = $url;
+        }
+    </script>
+
 @endsection

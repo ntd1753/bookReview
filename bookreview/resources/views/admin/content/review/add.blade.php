@@ -10,30 +10,55 @@
             <form action="{{route("admin.review.store")}}" method="POST">
                 <div class="form">
                     @csrf
-                    <div class="">
-                        <label for="reviewName">Tiêu đề bài viết</label>
-                        <input type="text" class="form-control" id="reviewName" name="name" placeholder="Nhập tiêu đề bài viết ...">
+                    <div class="row row-cols-2">
+                        <div class="">
+                            <label for="reviewName">Tiêu đề bài viết</label>
+                            <input type="text" class="form-control" id="reviewName" name="name" placeholder="Nhập tiêu đề bài viết ...">
+                        </div>
+
+                        <div class="">
+                            <label for="description">SEO title</label>
+                            <input type="text" class="form-control" id="description" name="seo_title" placeholder="Nhập description....." >
+                        </div>
+                    </div>
+                    <div class="row row-cols-2">
+                        <div class="">
+                            <label for="reviewName">slug bài viết</label>
+                            <input type="text" class="form-control" id="reviewName" name="slug" placeholder="Nhập tiêu đề bài viết ...">
+                        </div>
+                        <div class="">
+
+                            <label for="reviewName">SEO  keyword</label>
+                            <input type="text" class="form-control" id="reviewName" name="seo_keywords" placeholder="Nhập tiêu đề bài viết ...">
+                        </div>
+
+                    </div>
+                    <div class="row row-cols-2">
+                        <div class="">
+                            <label for="description">mô tả</label>
+                            <textarea class="" id="content" name="description" name="description"></textarea>
+
+                        </div>
+                        <div class="">
+                            <label for="content">SEO DES</label>
+                            <textarea id="Seo" name="seo_description"></textarea>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2">
+                        <div class="">
+                            <label for="content">Nội dung</label>
+                            <textarea id="content" class="tinyMce" name="content"></textarea>
+                        </div>
+
                     </div>
 
-                    <div class="">
-                        <label for="description">mô tả</label>
-                        <input type="text" class="form-control" id="description" name="description" placeholder="Nhập description....." >
-                    </div>
-                    <div class="">
-                        <label for="content">Nội dung</label>
-                        <input type="text" class="form-control" id="content" name="content" placeholder="Nhập nội dung ....." >
-                    </div>
-                    <div class="">
-                        <label for="validationDefault04">Danh mục</label>
-                        <select class="form-control" id="validationDefault04" name="category_id">
-                            <option value="0" selected>Không có danh mục</option>
-                            @include('admin.content.review.category_option', ["categories" =>$categories, 'level' => 0])
-                        </select>
-                    </div>
                     <div class="my-2">
                         <label for="preview-image">Chọn ảnh bài viết</label><br>
-                        <input type="text" class="form-control" id="preview_image" name="preview_image" placeholder="Nhập link ảnh ....." >
-{{--                        <input type="file" class="" id="preview-image" name="preview_image" placeholder="Nhập nội dung ....." >--}}
+                        <input type="text" id="image_label" class="form-control" name="image"
+                               aria-label="Image" aria-describedby="button-image">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="button-image">Select</button>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -42,4 +67,23 @@
             </form>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            document.getElementById('button-image').addEventListener('click', (event) => {
+                event.preventDefault();
+
+                window.open('/file-manager/fm-button', 'fm', 'width=1400,height=800');
+            });
+        });
+        // set file link
+        function fmSetLink(url) {
+            //console.log(url)
+            url = url.replace(/^.*\/\/[^\/]+/, ''); // remove domain
+            console.log(url)
+            document.getElementById('image_label').value = url;
+
+        }
+    </script>
+
 @endsection

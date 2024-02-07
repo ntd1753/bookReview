@@ -20,10 +20,6 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-
-});
 
 
 Route::group(['prefix' => 'admin'], function () {
@@ -61,8 +57,9 @@ Route::group(['prefix' => 'admin'], function () {
         //Route::get('/delete/{id}', [UserController::class,'destroy'])->name('admin.menu.destroy'); // delete category
     });
 });
-
-
+Route::get('/', function () {
+    return view('frontend.home');
+});
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');

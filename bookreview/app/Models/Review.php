@@ -9,4 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Review extends Model
 {
     use HasFactory;
+    public function seo(){
+        return $this -> belongsTo(SEO::class, "id", "review_id");
+    }
 }

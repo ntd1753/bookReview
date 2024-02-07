@@ -27,10 +27,13 @@
                                 </tbody>
                             </table>
                         </div>
+                        @include("admin.content.review.review_modal",["reviews"=>$reviews])
+
                         {{ $reviews->onEachSide(5)->links()}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    @include("admin.content.review.seo_modal",["reviews"=>$reviews])
 @endsection
