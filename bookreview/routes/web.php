@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Middleware\AdminAuthMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\MenuController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,15 +21,19 @@ use App\Http\Controllers\HomeController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+//Route::get('register',[RegisterController::class,'showAdminRegistrationForm'])->name("admin.auth.register");
+//Route::post('register',[RegisterController::class,'storeAdminAccount'])->name("admin.auth.register.store");
+Route::get('login',[LoginController::class,'showLoginForm'])->name("auth.login");
+Route::post('login',[LoginController::class,'Login'])->name("auth.login.store");
 
 
+Route::get('admin/register',[RegisterController::class,'showAdminRegistrationForm'])->name("admin.auth.register");
+Route::post('admin/register',[RegisterController::class,'storeAdminAccount'])->name("admin.auth.register.store");
+Route::get('admin/login',[LoginController::class,'showAdminLoginForm'])->name("admin.auth.login");
+Route::post('admin/login',[LoginController::class,'adminLogin'])->name("admin.auth.login.store");
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin','middleware' => ['auth:admin']], function () {
     Route::get('/',[AdminController::class,'index'])->name("admin.index");
-    Route::get('/register',[RegisterController::class,'showAdminRegistrationForm'])->name("admin.auth.register");
-    Route::post('/register',[RegisterController::class,'storeAdminAccount'])->name("admin.auth.register.store");
-    Route::get('/login',[LoginController::class,'showAdminLoginForm'])->name("admin.auth.login");
-    Route::post('/login',[LoginController::class,'adminLogin'])->name("admin.auth.login.store");
     Route::group(['prefix' => 'category'], function () {
         Route::get('/',[CategoryController::class,'index'])->name("admin.category.index"); // danh sách danh mục
         Route::get('/add', [CategoryController::class,'add'])->name('admin.category.add'); // Trả về form thêm mới
@@ -57,14 +63,19 @@ Route::group(['prefix' => 'admin'], function () {
         //Route::get('/delete/{id}', [UserController::class,'destroy'])->name('admin.menu.destroy'); // delete category
     });
 });
-Route::get('/', function () {
-    return view('frontend.home');
-});
-Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/media', [HomeController::class, 'media'])->name('media');
+//Route::get('/', function () {return view('frontend.home');
+//})->name("frontend.home");
 
-Route::get('/tinymce', function () {
-    return view('tinymce');
+Route::group(['prefix' => 'dashboard','middleware' => ['auth:web']], function () {
+    Route::get('/', [App\Http\Controllers\User\ReviewController::class, 'index'])->name("user.index");
+    Route::get('/add', [App\Http\Controllers\User\ReviewController::class, 'add'])->name('user.review.add'); // Trả về form thêm mới
+    Route::post('/add', [App\Http\Controllers\User\ReviewController::class, 'store'])->name('user.review.store'); // tạo mới category
+    Route::get('/edit/{review_id}', [App\Http\Controllers\User\ReviewController::class, 'edit'])->name('user.review.edit'); // Trả về form edit category
+    Route::post('/edit/{review_id}', [App\Http\Controllers\User\ReviewController::class, 'update'])->name('user.review.update'); // Update category
+    Route::get('/delete/{id}', [App\Http\Controllers\User\ReviewController::class, 'destroy'])->name('user.review.destroy'); // delete category });
 });
+
+Route::post('/logout', [App\Http\Controllers\User\UserController::class,"logout"])->name("logout");
+Route::get('/', [App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('frontend.home'); // delete category });
+Route::get("/post-detail/{id}",[App\Http\Controllers\Frontend\HomeController::class, 'detail'])->name('frontend.detail');

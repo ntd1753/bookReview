@@ -39,6 +39,9 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+    public function  showLoginForm(){
+        return view('auth.login');
+    }
     public function  showAdminLoginForm(){
         return view('auth.adminLogin');
     }
@@ -47,6 +50,16 @@ class LoginController extends Controller
         if (\Auth::guard('admin')->attempt($request->only(['email','password']), $request->get('remember'))){
 
             return redirect()->intended('/admin');
+        }
+        return back()->withInput($request->only('email', 'remember'));
+
+    }
+
+    public  function  login(Request $request){
+
+        if (\Auth::guard('web')->attempt($request->only(['email','password']), $request->get('remember'))){
+
+            return redirect()->intended('/');
         }
         return back()->withInput($request->only('email', 'remember'));
 

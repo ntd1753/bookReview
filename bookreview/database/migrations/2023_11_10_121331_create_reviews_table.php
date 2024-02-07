@@ -20,6 +20,7 @@ return new class extends Migration
             $table->longText("description");
             $table->unsignedBigInteger("category_id");
             $table->unsignedBigInteger('user_id');
+            $table->unsignedInteger("num_view");
 //            $table->foreign('user_id')->references('id')->on('users');
 //            $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();

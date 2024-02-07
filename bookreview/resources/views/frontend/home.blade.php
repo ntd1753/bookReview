@@ -5,319 +5,98 @@
             <!-- block -->
             <div class="row">
                 <div class="col-lg-9">
-                    <h3 class="section-title-left">Featured posts </h3>
+                    <h3 class="section-title-left">Bài Viết Mới</h3>
                     <div class="row">
-                        <div class="col-lg-5 col-md-6 item">
-                            <div class="card">
-                                <div class="card-header p-0 position-relative">
-                                    <a href="#blog-single">
-                                        <img class="card-img-bottom d-block radius-image" src="assets/images/b1.jpg"
-                                             alt="Card image cap">
-                                    </a>
-                                </div>
-                                <div class="card-body p-0 blog-details">
-                                    <a href="#blog-single" class="blog-desc">How to Create Detailed Buyer Personas for
-                                        Your Business
-                                    </a>
-                                    <p>Lorem ipsum dolor sit amet consectetur ipsum adipisicing elit. Qui eligendi
-                                        vitae sit.</p>
-                                    <div class="author align-items-center mt-3 mb-1">
-                                        <a href="#author">Johnson smith</a> in <a href="#url">Design</a>
+                        @foreach($reviews as $item)
+                            @if($loop->index == 0)
+                                <div class="col-lg-5 col-md-6 item">
+                                    <div class="card">
+                                        <div class="card-header p-0 position-relative">
+                                            <a href="{{route('frontend.detail',$item->id)}}">
+                                                <img class="card-img-bottom d-block radius-image" src="{!! $item-> preview_image !!}"
+                                                     alt="Card image cap">
+                                            </a>
+                                        </div>
+                                        <div class="card-body p-0 blog-details">
+                                            <a href="{{route('frontend.detail',$item->id)}}" class="blog-desc">{{$item -> name}}
+                                            </a>
+                                            <p>{!! $item -> description !!}</p>
+                                            <div class="author align-items-center mt-3 mb-1">
+                                                <a href="#author">{{$item -> owner -> name}}</a> in <a href="#url">Design</a>
+                                            </div>
+                                            <ul class="blog-meta">
+                                                <li class="meta-item blog-lesson">
+                                                    <span class="meta-value"> {{$item-> updated_at}} </span>
+                                                </li>
+                                                <li class="meta-item blog-students">
+                                                    <span class="meta-value"> 6min read</span>
+                                                </li>
+                                            </ul>
+                                            <a href="#featuredposts" class="btn btn-style btn-outline mt-4">All featured
+                                                posts</a>
+                                        </div>
                                     </div>
-                                    <ul class="blog-meta">
-                                        <li class="meta-item blog-lesson">
-                                            <span class="meta-value"> April 13, 2020 </span>
-                                        </li>
-                                        <li class="meta-item blog-students">
-                                            <span class="meta-value"> 6min read</span>
-                                        </li>
-                                    </ul>
-                                    <a href="#featuredposts" class="btn btn-style btn-outline mt-4">All featured
-                                        posts</a>
                                 </div>
-                            </div>
-                        </div>
+                            @endif
+                        @endforeach
+
                         <div class="col-lg-7 col-md-6 mt-md-0 mt-5">
                             <div class="list-view list-view1">
-                                <div class="grids5-info">
-                                    <a href="#blog-single" class="d-block zoom"><img src="assets/images/1.jpg" alt=""
-                                                                                     class="img-fluid radius-image news-image"></a>
-                                    <div class="blog-info align-self">
-                                        <a href="#blog-single" class="blog-desc1">How to Create your blog domain to make
-                                            it live
-                                        </a>
-                                        <div class="author align-items-center mt-3 mb-1">
-                                            <a href="#author">Johnson smith</a> in <a href="#url">Design</a>
+                                @for($i=1; $i<=3; $i++)
+                                    <div class="grids5-info mb-5">
+                                        <a href="{{route('frontend.detail',$item->id)}}" class="d-block zoom"><img src="{!! $item-> preview_image !!}" alt=""
+                                                                                         class="img-fluid radius-image news-image"></a>
+                                        <div class="blog-info align-self">
+                                            <a href="{{route('frontend.detail',$item->id)}}" class="blog-desc1">{{$item -> name}}
+                                            </a>
+                                            <div class="author align-items-center mt-3 mb-1">
+                                                <a href="#author">{{$item -> owner -> name}}</a> in <a href="#url">Design</a>
+                                            </div>
+                                            <ul class="blog-meta">
+                                                <li class="meta-item blog-lesson">
+                                                    <span class="meta-value"> {{$item-> updated_at}} </span>
+                                                </li>
+                                                <li class="meta-item blog-students">
+                                                    <span class="meta-value"> 6min read</span>
+                                                </li>
+                                            </ul>
                                         </div>
-                                        <ul class="blog-meta">
-                                            <li class="meta-item blog-lesson">
-                                                <span class="meta-value"> April 13, 2020 </span>
-                                            </li>
-                                            <li class="meta-item blog-students">
-                                                <span class="meta-value"> 6min read</span>
-                                            </li>
-                                        </ul>
                                     </div>
-                                </div>
-                                <div class="grids5-info mt-5">
-                                    <a href="#blog-single" class="d-block zoom"><img src="assets/images/2.jpg" alt=""
-                                                                                     class="img-fluid radius-image news-image"></a>
-                                    <div class="blog-info align-self">
-                                        <a href="#blog-single" class="blog-desc1">Register a Domain or Subdomain With a
-                                            Website Host
-                                        </a>
-                                        <div class="author align-items-center mt-3 mb-1">
-                                            <a href="#author">Johnson smith</a> in <a href="#url">Design</a>
-                                        </div>
-                                        <ul class="blog-meta">
-                                            <li class="meta-item blog-lesson">
-                                                <span class="meta-value"> April 13, 2020 </span>
-                                            </li>
-                                            <li class="meta-item blog-students">
-                                                <span class="meta-value"> 6min read</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="grids5-info mt-5">
-                                    <a href="#blog-single" class="d-block zoom"><img src="assets/images/3.jpg" alt=""
-                                                                                     class="img-fluid radius-image news-image"></a>
-                                    <div class="blog-info align-self">
-                                        <a href="#blog-single" class="blog-desc1">Home to Customize your blog's theme
-                                            with 3 simple steps
-                                        </a>
-                                        <div class="author align-items-center mt-3 mb-1">
-                                            <a href="#author">Johnson smith</a> in <a href="#url">Design</a>
-                                        </div>
-                                        <ul class="blog-meta">
-                                            <li class="meta-item blog-lesson">
-                                                <span class="meta-value"> April 13, 2020 </span>
-                                            </li>
-                                            <li class="meta-item blog-students">
-                                                <span class="meta-value"> 6min read</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                @endfor
+
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 trending mt-lg-0 mt-5">
                     <h3 class="section-title-left">Trending </h3>
+                    @foreach($trend as $item)
+                        <div class="grids5-info">
+                            <h4>{{$loop->index +1}}</h4>
+                            <div class="blog-info">
+                                <a href="{{route('frontend.detail',$item->id)}}" class="blog-desc1"> {{$item -> name}}
+                                </a>
+                                <div class="author align-items-center mt-2 mb-1">
+                                    <a href="#author">{{$item -> owner -> name}}</a> in <a href="#url">Design</a>
+                                </div>
+                                <ul class="blog-meta">
+                                    <li class="meta-item blog-lesson">
+                                        <span class="meta-value"> {{$item-> updated_at}} </span>
+                                    </li>
+                                    <li class="meta-item blog-students">
+                                        <span class="meta-value"> 6min read</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
 
-                    <div class="grids5-info">
-                        <h4>01.</h4>
-                        <div class="blog-info">
-                            <a href="#blog-single" class="blog-desc1"> How to Identify first blog post's topic
-                            </a>
-                            <div class="author align-items-center mt-2 mb-1">
-                                <a href="#author">Johnson smith</a> in <a href="#url">Design</a>
-                            </div>
-                            <ul class="blog-meta">
-                                <li class="meta-item blog-lesson">
-                                    <span class="meta-value"> April 13, 2020 </span>
-                                </li>
-                                <li class="meta-item blog-students">
-                                    <span class="meta-value"> 6min read</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="grids5-info">
-                        <h4>02.</h4>
-                        <div class="blog-info">
-                            <a href="#blog-single" class="blog-desc1"> 5 ways to fix a leaky faucet
-                            </a>
-                            <div class="author align-items-center mt-2 mb-1">
-                                <a href="#author">Johnson smith</a> in <a href="#url">Design</a>
-                            </div>
-                            <ul class="blog-meta">
-                                <li class="meta-item blog-lesson">
-                                    <span class="meta-value"> April 13, 2020 </span>
-                                </li>
-                                <li class="meta-item blog-students">
-                                    <span class="meta-value"> 6min read</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="grids5-info">
-                        <h4>03.</h4>
-                        <div class="blog-info">
-                            <a href="#blog-single" class="blog-desc1"> Changing the topic scope
-                            </a>
-                            <div class="author align-items-center mt-2 mb-1">
-                                <a href="#author">Johnson smith</a> in <a href="#url">Design</a>
-                            </div>
-                            <ul class="blog-meta">
-                                <li class="meta-item blog-lesson">
-                                    <span class="meta-value"> April 13, 2020 </span>
-                                </li>
-                                <li class="meta-item blog-students">
-                                    <span class="meta-value"> 6min read</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="grids5-info">
-                        <h4>04.</h4>
-                        <div class="blog-info">
-                            <a href="#blog-single" class="blog-desc1"> Write an intro (make it captivating).
-                            </a>
-                            <div class="author align-items-center mt-3 mb-1">
-                                <a href="#author">Johnson smith</a> in <a href="#url">Design</a>
-                            </div>
-                            <ul class="blog-meta">
-                                <li class="meta-item blog-lesson">
-                                    <span class="meta-value"> April 13, 2020 </span>
-                                </li>
-                                <li class="meta-item blog-students">
-                                    <span class="meta-value"> 6min read</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    @endforeach
+
                 </div>
             </div>
             <!-- //block -->
 
-
             <!-- block -->
-            <div class="item mt-5 pt-4">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <a href="#blog-single">
-                            <img class="card-img-bottom d-block radius-image" src="assets/images/p3.jpg"
-                                 alt="Card image cap">
-                        </a>
-                    </div>
-                    <div class="col-lg-6 blog-details align-self mt-lg-0 mt-sm-5 mt-4">
-                        <a href="#blog-single" class="blog-desc-big">Your Blog Posts are Boring: 9 Tips for Making your
-                            Writing more Interesting
-                        </a>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos blanditiis, odit non asperiores
-                            possimus voluptas sit nihil nam id explicabo saepe sapiente excepturi similique, dicta
-                            officia odio natus nemo. Ratione ipsa distinctio explicabo esse quod autem
-                            veritatis, in fugit odio.</p>
-                        <div class="author align-items-center mt-4 mb-1">
-                            <a href="#author">Johnson smith</a> in <a href="#url">Design</a>
-                        </div>
-                        <ul class="blog-meta">
-                            <li class="meta-item blog-lesson">
-                                <span class="meta-value"> April 13, 2020 </span>
-                            </li>
-                            <li class="meta-item blog-students">
-                                <span class="meta-value"> 6min read</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- //block-->
-
-            <!-- block -->
-            <div class="item mt-5 pt-lg-5">
-                <h3 class="section-title-left">Today Highlights </h3>
-                <div class="row">
-                    <div class="col-lg-5 col-md-6">
-                        <div class="list-view list-view1">
-                            <div class="grids5-info">
-                                <a href="#blog-single" class="d-block zoom"><img src="assets/images/4.jpg" alt=""
-                                                                                 class="img-fluid radius-image news-image"></a>
-                                <div class="blog-info align-self">
-                                    <a href="#blog-single" class="blog-desc1">Edit/proofread your post, and fix your
-                                        formatting.
-                                    </a>
-                                    <div class="author align-items-center mt-3 mb-1">
-                                        <a href="#author">Johnson smith</a> in <a href="#url">Design</a>
-                                    </div>
-                                    <ul class="blog-meta">
-                                        <li class="meta-item blog-lesson">
-                                            <span class="meta-value"> April 13, 2020 </span>
-                                        </li>
-                                        <li class="meta-item blog-students">
-                                            <span class="meta-value"> 6min read</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="grids5-info mt-5">
-                                <a href="#blog-single" class="d-block zoom"><img src="assets/images/5.jpg" alt=""
-                                                                                 class="img-fluid radius-image news-image"></a>
-                                <div class="blog-info align-self">
-                                    <a href="#blog-single" class="blog-desc1">The Beginner's Guide to Starting a
-                                        Successful Blog in 2020
-                                    </a>
-                                    <div class="author align-items-center mt-3 mb-1">
-                                        <a href="#author">Johnson smith</a> in <a href="#url">Design</a>
-                                    </div>
-                                    <ul class="blog-meta">
-                                        <li class="meta-item blog-lesson">
-                                            <span class="meta-value"> April 13, 2020 </span>
-                                        </li>
-                                        <li class="meta-item blog-students">
-                                            <span class="meta-value"> 6min read</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-5 col-md-6 mt-md-0 mt-5">
-                        <div class="list-view list-view1">
-                            <div class="grids5-info">
-                                <a href="#blog-single" class="d-block zoom"><img src="assets/images/6.jpg" alt=""
-                                                                                 class="img-fluid radius-image news-image"></a>
-                                <div class="blog-info align-self">
-                                    <a href="#blog-single" class="blog-desc1">Home to Organize your content in an
-                                        outline.
-                                    </a>
-                                    <div class="author align-items-center mt-3 mb-1">
-                                        <a href="#author">Johnson smith</a> in <a href="#url">Design</a>
-                                    </div>
-                                    <ul class="blog-meta">
-                                        <li class="meta-item blog-lesson">
-                                            <span class="meta-value"> April 13, 2020 </span>
-                                        </li>
-                                        <li class="meta-item blog-students">
-                                            <span class="meta-value"> 6min read</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="grids5-info mt-5">
-                                <a href="#blog-single" class="d-block zoom"><img src="assets/images/7.jpg" alt=""
-                                                                                 class="img-fluid radius-image news-image"></a>
-                                <div class="blog-info align-self">
-                                    <a href="#blog-single" class="blog-desc1">10 Fresh Ways to Get Better Results From
-                                        Your Blog Posts
-                                    </a>
-                                    <div class="author align-items-center mt-3 mb-1">
-                                        <a href="#author">Johnson smith</a> in <a href="#url">Design</a>
-                                    </div>
-                                    <ul class="blog-meta">
-                                        <li class="meta-item blog-lesson">
-                                            <span class="meta-value"> April 13, 2020 </span>
-                                        </li>
-                                        <li class="meta-item blog-students">
-                                            <span class="meta-value"> 6min read</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-2 col-sm-6 mt-lg-0 mt-5">
-                        <div class="ad-img">
-                            <a href="#ad-img"><img src="assets/images/ad1.jpg" class="img-fluid" alt="ad image" /></a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
             <!-- //block-->
 
             <!-- block -->

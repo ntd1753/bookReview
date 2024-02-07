@@ -1,30 +1,26 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use App\Models\Comment;
 use App\Models\Review;
 use App\Models\Seo;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
     function index(){
         //$review =  DB::table('reviews')->paginate(15);
-        $review =  Review::paginate(2);
-        return view("admin.content.review.index",["reviews" => $review]);
+        $review =  Review::where('user_id','=',Auth::user()->id)->paginate(15);
+        return view("user.review.index",["reviews" => $review]);
     }
     public function add(){
         $categories = Category::where('category_parent_id','=',0)->with('childs')->get();
-        return view("admin.content.review.add", ["categories"=>$categories]);
+        return view("user.review.add", ["categories"=>$categories]);
     }
     public function store(Request $request){
-        echo "<pre>";
-         print_r($request->all());
-         echo "</pre>";
         $input = $request->all();
         $review = new Review();
         $review["name"] = $input["name"];
@@ -33,27 +29,24 @@ class ReviewController extends Controller
         $review["content"] = $input["content"];
         $review["preview_image"]=$input["image"];
         $review["category_id"]=1;
-        $review["user_id"]= '5'; //chưa có user
+        $review["user_id"]=Auth::user()->id; //chưa có user
         $review["num_view"]=0;
         $review->save();
-
         $seo = new SEO();
         $seo["review_id"] = $review->id;
         $seo["seo_keyword"] = $input["seo_keywords"];
         $seo["seo_description"]=$input["seo_description"];
         $seo["seo_title"] = $input["seo_title"];
         $seo -> save();
-        return redirect()->route("admin.review.index");
+        return redirect()->route("user.index");
     }
     public function edit($review_id){
         $item =Review::find($review_id);
         $seo = Seo::Where('review_id', "=", $review_id)->get();
         $categories = Category::where('category_parent_id','=',0)->with('childs')->get();
-        //print_r($seo);
         $seo_0 = $seo[0];
-//        print_r($seo);
-//        exit;
-        return view("admin.content.review.edit", ["categories"=>$categories, "item"=>$item,"seo" => $seo_0]);
+
+        return view("user.review.edit", ["categories"=>$categories, "item"=>$item,"seo" => $seo_0]);
 
     }
 
@@ -77,7 +70,7 @@ class ReviewController extends Controller
             $seo["seo_title"] = $input["seo_title"];
             $seo->save();
         }
-        return redirect()->route("admin.review.index");
+        return redirect()->route("user.index");
 
     }
 
@@ -86,6 +79,6 @@ class ReviewController extends Controller
         if($item){
                 $item->delete();
         }
-        return redirect()->route("admin.review.index");
+        return redirect()->route("user.index");
     }
 }

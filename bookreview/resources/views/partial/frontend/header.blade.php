@@ -2,8 +2,8 @@
     <!--/nav-->
     <nav class="navbar navbar-expand-lg navbar-light fill px-lg-0 py-0 px-3">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <span class="fa fa-pencil-square-o"></span> Design Blog</a>
+            <a class="navbar-brand" href="{{route('frontend.home')}}">
+                <span class="fa fa-pencil-square-o"></span> Book Review</a>
             <!-- if logo is image enable this
                     <a class="navbar-brand" href="#index.html">
                         <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
@@ -18,26 +18,32 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item dropdown @@category__active">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Categories <span class="fa fa-angle-down"></span>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item @@ls__active" href="lifestyle.html">Lifestyle posts</a>
-                            <a class="dropdown-item @@cp__active" href="culture.html">Culture posts</a>
-                        </div>
-                    </li>
-                    <li class="nav-item @@contact__active">
-                        <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
-                </ul>
+{{--                    <li class="nav-item active my-auto">--}}
+{{--                        <a class="nav-link" href="{{route('frontend.home')}}">Trang chủ</a>--}}
+{{--                    </li>--}}
+                    @foreach($menus as $item)
+                        @if($item -> menu_parent_id == 0)
+                            <li class="nav-item dropdown @@category__active my-auto">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{$item -> menu_name }} <span class="fa fa-angle-down"></span>
+                                </a>
 
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    @foreach($menus as $child)
+                                        @if($child -> menu_parent_id == $item -> id)
+                                    <a class="dropdown-item @@ls__active" href="lifestyle.html">
+                                        {{$child -> menu_name}}</a>
+                                        @endif
+                                    @endforeach
+                                </div>
+
+                            </li>
+
+                        @endif
+                    @endforeach
                 <!--/search-right-->
-                <div class="search-right mt-lg-0 mt-2">
+                <div class="search-right my-auto">
                     <a href="#search" title="search"><span class="fa fa-search" aria-hidden="true"></span></a>
                     <!-- search popup -->
                     <div id="search" class="pop-overlay">
@@ -56,36 +62,46 @@
                 <!--//search-right-->
 
                 <!-- author -->
-                <div class="header-author d-flex ml-lg-4 pl-2 mt-lg-0 mt-3">
-                    <a class="img-circle img-circle-sm" href="#author">
-                        <img src="assets/images/author.jpg" class="img-fluid" alt="...">
-                    </a>
-                    <div class="align-self ml-3">
-                        <a href="#author">
-                            <h5>Alexander</h5>
-                        </a>
-                        <span>Blog Writer</span>
-                    </div>
-                </div>
-                <!-- // author-->
-            </div>
+                    @guest()
+                        <div class="header-author d-flex ml-lg-4 pl-2 mt-lg-0 mt-3">
+
+                            <div class="align-self ml-3">
+                                <a href="{{ route('auth.login') }}">
+                                    <h5>Đăng nhập</h5>
+                                </a>
+
+                            </div>
+                        </div>
+                    @else
+                        <div class="header-author d-flex ml-lg-4 pl-2 mt-lg-0 mt-3 dropdown @@category__active">
+                            <a class="img-circle img-circle-sm" href="#author">
+                                <img src="{{asset('frontend//images/author.jpg')}}" class="img-fluid" alt="...">
+                            </a>
+                            <div class="align-self ml-3">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <h5>{{Auth()->user()->name}}</h5>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item @@ls__active" href="{{route('user.index')}}">
+                                                dashboard</a>
+                                    <a class="dropdown-item @@ls__active" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        Đăng xuất</a>
+                                </div>
+                            </div>
+                        </div>
+
+{{--                        <p>{{Auth::user()->name}}</p>--}}
+                    @endguest
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
 
             <!-- toggle switch for light and dark theme -->
-            <div class="mobile-position">
-                <nav class="navigation">
-                    <div class="theme-switch-wrapper">
-                        <label class="theme-switch" for="checkbox">
-                            <input type="checkbox" id="checkbox">
-                            <div class="mode-container">
-                                <i class="gg-sun"></i>
-                                <i class="gg-moon"></i>
-                            </div>
-                        </label>
-                    </div>
-                </nav>
-            </div>
+
             <!-- //toggle switch for light and dark theme -->
-        </div>
-    </nav>
+
     <!--//nav-->
 </header>
