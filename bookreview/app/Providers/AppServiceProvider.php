@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
 use App\Models\Menu;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -19,6 +20,10 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*', function ($view) {
             $menus=DB::table("menus")->get();
             $view->with('menus', $menus);
+
         });
+        $categories = Category::all();
+        view()->share('categories', $categories);
+
     }
 }

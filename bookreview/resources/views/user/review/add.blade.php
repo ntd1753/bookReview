@@ -33,6 +33,12 @@
                         </div>
 
                     </div>
+                    <div class="grid grid-cols-2">
+                        <label for="validationDefault04">Danh mục</label>
+                        <select class="form-control" id="validationDefault04" name="category_parent_id">
+                            @include('admin.content.category.category_option', ["categories" =>$categories, 'level' => 0])
+                        </select>
+                    </div>
                     <div class="row row-cols-2">
                         <div class="">
                             <label for="description">mô tả</label>

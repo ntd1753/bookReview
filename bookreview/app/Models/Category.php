@@ -17,5 +17,8 @@ class Category extends Model
     public function childs():HasMany{
         return $this->hasMany(Category::class, "category_parent_id");
     }
-
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'category_id');
+    }
 }

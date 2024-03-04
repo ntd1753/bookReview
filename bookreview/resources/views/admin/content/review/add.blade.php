@@ -57,7 +57,7 @@
                         <input type="text" id="image_label" class="form-control" name="image"
                                aria-label="Image" aria-describedby="button-image">
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" id="button-image">Select</button>
+                            <button class="btn btn-outline-secondary" type="button" id="button-image"><div data-icon="a" class="icon"></div></button>
                         </div>
                     </div>
                 </div>

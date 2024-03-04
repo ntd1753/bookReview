@@ -19,5 +19,8 @@ class Review extends Model
     {
         return $this->hasOne(User::class, "id", "user_id");
     }
-
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 }
