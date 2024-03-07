@@ -22,7 +22,7 @@
                                 </tr>
                                 </thead>
                                 <tbody class="text-left">
-                                @include("admin.content.menu.row_table",["menus"=>$menus, "level"=>0])
+                                @include("admin.content.menu.row_table",["menu"=>$menus, "level"=>0])
                                 </tbody>
                             </table>
                         </div>

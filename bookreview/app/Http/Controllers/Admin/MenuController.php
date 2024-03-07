@@ -5,16 +5,18 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Menu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MenuController extends Controller
 {
     public function index(){
         $menus = Menu::where('menu_parent_id','=',0)->with('childs')->get();
-        return view("admin.content.menu.index",["menus"=>$menus]);
+        //dd($menus);
+        return view("admin.content.menu.index",["menu"=>$menus]);
     }
     public function add(){
         $menus = Menu::where('menu_parent_id','=',0)->with('childs')->get();
-        return view("admin.content.menu.add", ["menus"=>$menus]);
+        return view("admin.content.menu.add", ["menu"=>$menus]);
     }
     public function store(Request $request){
 //         echo "<pre>";
@@ -32,7 +34,7 @@ class MenuController extends Controller
     public function edit($id){
         $item = Menu::find($id);
         $menus = Menu::where('menu_parent_id','=',0)->with('childs')->get();
-        return view("admin.content.menu.edit", ["menus"=>$menus, "item"=>$item]);
+        return view("admin.content.menu.edit", ["menu"=>$menus, "item"=>$item]);
     }
     public function update(Request $request, $id){
         $item = Menu::find($id);

@@ -23,14 +23,13 @@ use App\Http\Controllers\HomeController;
 */
 //Route::get('register',[RegisterController::class,'showAdminRegistrationForm'])->name("admin.auth.register");
 //Route::post('register',[RegisterController::class,'storeAdminAccount'])->name("admin.auth.register.store");
-Route::get('login',[LoginController::class,'showLoginForm'])->name("auth.login");
-Route::post('login',[LoginController::class,'Login'])->name("auth.login.store");
-
+Route::post('/login',[LoginController::class,'Login'])->name("auth.login.store");
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name("auth.login"); // Cho người dùng
 
 Route::get('/register',[RegisterController::class,'showAdminRegistrationForm'])->name("admin.auth.register");
 Route::post('/register',[RegisterController::class,'storeAdminAccount'])->name("admin.auth.register.store");
-Route::get('/login',[LoginController::class,'showAdminLoginForm'])->name("admin.auth.login");
-Route::post('/login',[LoginController::class,'adminLogin'])->name("admin.auth.login.store");
+Route::get('admin/login',[LoginController::class,'showAdminLoginForm'])->name("admin.auth.login");
+Route::post('admin/login',[LoginController::class,'adminLogin'])->name("admin.auth.login.store");
 
 Route::group(['prefix' => 'admin','middleware' => ['auth:admin']], function () {
     Route::get('/',[AdminController::class,'index'])->name("admin.index");

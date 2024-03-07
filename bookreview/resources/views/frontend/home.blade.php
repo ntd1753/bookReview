@@ -42,27 +42,29 @@
 
                         <div class="col-lg-7 col-md-6 mt-md-0 mt-5">
                             <div class="list-view list-view1">
-                                @for($i=1; $i<=3; $i++)
-                                    <div class="grids5-info mb-5">
-                                        <a href="{{route('frontend.detail',$item->id)}}" class="d-block zoom"><img src="{!! $item-> preview_image !!}" alt=""
-                                                                                         class="img-fluid radius-image news-image"></a>
-                                        <div class="blog-info align-self">
-                                            <a href="{{route('frontend.detail',$item->id)}}" class="blog-desc1">{{$item -> name}}
-                                            </a>
-                                            <div class="author align-items-center mt-3 mb-1">
-                                                <a href="#author">{{$item -> owner -> name}}</a> in <a href="#url">Design</a>
+                                @foreach($reviews as $item)
+                                    @if($loop -> index >0 && $loop -> index <=3)
+                                        <div class="grids5-info mb-5">
+                                            <a href="{{route('frontend.detail',$item->id)}}" class="d-block zoom"><img src="{!! $item-> preview_image !!}" alt=""
+                                                                                             class="img-fluid radius-image news-image"></a>
+                                            <div class="blog-info align-self">
+                                                <a href="{{route('frontend.detail',$item->id)}}" class="blog-desc1">{{$item -> name}}
+                                                </a>
+                                                <div class="author align-items-center mt-3 mb-1">
+                                                    <a href="#author">{{$item -> owner -> name}}</a> in <a href="#url">Design</a>
+                                                </div>
+                                                <ul class="blog-meta">
+                                                    <li class="meta-item blog-lesson">
+                                                        <span class="meta-value"> {{$item-> updated_at}} </span>
+                                                    </li>
+                                                    <li class="meta-item blog-students">
+                                                        <span class="meta-value"> 6min read</span>
+                                                    </li>
+                                                </ul>
                                             </div>
-                                            <ul class="blog-meta">
-                                                <li class="meta-item blog-lesson">
-                                                    <span class="meta-value"> {{$item-> updated_at}} </span>
-                                                </li>
-                                                <li class="meta-item blog-students">
-                                                    <span class="meta-value"> 6min read</span>
-                                                </li>
-                                            </ul>
                                         </div>
-                                    </div>
-                                @endfor
+                                    @endif
+                                @endforeach
 
                             </div>
                         </div>

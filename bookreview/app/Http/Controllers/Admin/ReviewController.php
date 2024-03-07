@@ -14,7 +14,7 @@ class ReviewController extends Controller
 {
     function index(){
         //$review =  DB::table('reviews')->paginate(15);
-        $review =  Review::paginate(2);
+        $review =  Review::paginate(15);
         return view("admin.content.review.index",["reviews" => $review]);
     }
     public function add(){

@@ -7,7 +7,6 @@
         <td contenteditable="true">{{$item->address}}</td>
         <td contenteditable="true" class="place-content-center"><img src="{{$item->avatar}}" class="img-fluid avatar-80 "> </td>
         <td>
-            <a href="#">Sửa</a>
             <a href="#"
                onclick="return confirm('Bạn có muốn xóa không?');">Xóa</a>
         </td>

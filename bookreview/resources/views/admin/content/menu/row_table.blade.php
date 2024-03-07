@@ -1,4 +1,4 @@
-@foreach($menus as $item)
+@foreach($menu as $item)
     <tr>
         <td contenteditable="true">{{$item->id }}</td>
         <td contenteditable="true">{{str_repeat("----", $level)}}  {{$item->menu_name}}</td>
@@ -9,7 +9,7 @@
                onclick="return confirm('Bạn có muốn xóa không?');">Xóa</a>
         </td>
     </tr>
-    @if($item->childs)
-        @include('admin.content.menu.row_table', ["menus"=>$item->childs, "level"=>$level+1])
-    @endif
+{{--    @if($item->childs)--}}
+{{--        @include('admin.content.menu.row_table', ["menu"=>$item->childs, "level"=>$level+1])--}}
+{{--    @endif--}}
 @endforeach

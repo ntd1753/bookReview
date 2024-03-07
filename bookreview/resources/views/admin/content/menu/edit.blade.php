@@ -24,7 +24,7 @@
                         <label for="validationDefault04">menu cha</label>
                         <select class="form-control" id="validationDefault04" name="menu_parent_id">
                             <option value="0">Không có danh mục cha</option>
-                            @include("admin.content.menu.menu_selected_option", ["menus"=>$menus, "level"=>0, "item"=>$item])
+                            @include("admin.content.menu.menu_selected_option", ["menu"=>$menus, "level"=>0, "item"=>$item])
                         </select>
                     </div>
                 </div>
