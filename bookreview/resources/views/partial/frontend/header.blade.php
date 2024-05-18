@@ -21,25 +21,23 @@
 {{--                    <li class="nav-item active my-auto">--}}
 {{--                        <a class="nav-link" href="{{route('frontend.home')}}">Trang chủ</a>--}}
 {{--                    </li>--}}
-                    @foreach($menus as $item)
-                        @if($item -> menu_parent_id == 0)
+                    @foreach($categories as $item)
+                        @if($item -> category_parent_id == 0)
                             <li class="nav-item dropdown @@category__active my-auto">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                <a class="nav-link dropdown-toggle" href="/menu/{{$item->category_slug}}/{{$item->id}}" id="navbarDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{$item -> menu_name }} <span class="fa fa-angle-down"></span>
+                                    {{$item -> category_name }} <span class="fa fa-angle-down"></span>
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    @foreach($menus as $child)
-                                        @if($child -> menu_parent_id == $item -> id)
-                                    <a class="dropdown-item @@ls__active" href="lifestyle.html">
-                                        {{$child -> menu_name}}</a>
+                                    @foreach($categories as $child)
+                                        @if($child -> category_parent_id == $item -> id)
+                                    <a class="dropdown-item @@ls__active" href="/menu/{{$child->category_slug}}/{{$child->id}}">
+                                        {{$child -> category_name}}</a>
                                         @endif
                                     @endforeach
                                 </div>
-
                             </li>
-
                         @endif
                     @endforeach
                 <!--/search-right-->
@@ -49,7 +47,7 @@
                     <div id="search" class="pop-overlay">
                         <div class="popup">
                             <h3 class="hny-title two">Search here</h3>
-                            <form action="#" method="Get" class="search-box">
+                            <form action="/search" method="Get" class="search-box">
                                 <input type="search" placeholder="Search for blog posts" name="search"
                                        required="required" autofocus="">
                                 <button type="submit" class="btn">Search</button>
@@ -75,7 +73,7 @@
                     @else
                         <div class="header-author d-flex ml-lg-4 pl-2 mt-lg-0 mt-3 dropdown @@category__active">
                             <a class="img-circle img-circle-sm" href="#author">
-                                <img src="{{asset('frontend//images/author.jpg')}}" class="img-fluid" alt="...">
+                                <img src="https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg" class="img-fluid" alt="...">
                             </a>
                             <div class="align-self ml-3">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -83,8 +81,8 @@
                                     <h5>{{Auth()->user()->name}}</h5>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item @@ls__active" href="{{route('user.index')}}">
-                                                dashboard</a>
+{{--                                            <a class="dropdown-item @@ls__active" href="{{route('user.index')}}">--}}
+{{--                                                dashboard</a>--}}
                                     <a class="dropdown-item @@ls__active" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

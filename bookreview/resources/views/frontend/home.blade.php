@@ -113,17 +113,7 @@
 
                     </div>
                     <!-- pagination -->
-                    <div class="pagination-wrapper mt-5">
-                        <ul class="page-pagination">
-                            <li><span aria-current="page" class="page-numbers current">1</span></li>
-                            <li><a class="page-numbers" href="#url">2</a></li>
-                            <li><a class="page-numbers" href="#url">3</a></li>
-                            <li><a class="page-numbers" href="#url">4</a></li>
-                            <li><a class="page-numbers" href="#url">....</a></li>
-                            <li><a class="page-numbers" href="#url">15</a></li>
-                            <li><a class="next" href="#url"><span class="fa fa-angle-right"></span></a></li>
-                        </ul>
-                    </div>
+
                     <!-- //pagination -->
                 </div>
                 @include("components.trending",["$trend"=>$trend])

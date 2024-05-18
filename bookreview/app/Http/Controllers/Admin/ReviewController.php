@@ -13,8 +13,10 @@ use Illuminate\Support\Facades\DB;
 class ReviewController extends Controller
 {
     function index(){
-        //$review =  DB::table('reviews')->paginate(15);
         $review =  Review::paginate(15);
+
+        //$review =  DB::table('reviews'); // Lấy Ra toàn bộ bảng review lưu vào mảng $review
+
         return view("admin.content.review.index",["reviews" => $review]);
     }
     public function add(){

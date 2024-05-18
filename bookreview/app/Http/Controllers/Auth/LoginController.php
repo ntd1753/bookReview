@@ -7,7 +7,8 @@ use App\Providers\RouteServiceProvider;
 
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use App\Models\Admin;
 class LoginController extends Controller
 {
     /*
@@ -46,8 +47,7 @@ class LoginController extends Controller
         return view('auth.adminLogin');
     }
     public  function  adminLogin(Request $request){
-
-        if (\Auth::guard('admin')->attempt($request->only(['email','password']), $request->get('remember'))){
+        if (Auth::guard('admin')->attempt($request->only(['email','password']), $request->get('remember'))){
 
             return redirect()->intended('/admin');
         }
@@ -57,11 +57,16 @@ class LoginController extends Controller
 
     public  function  login(Request $request){
 
-        if (\Auth::guard('web')->attempt($request->only(['email','password']), $request->get('remember'))){
+        if (Auth::guard('web')->attempt($request->only(['email','password']), $request->get('remember'))){
 
             return redirect()->intended('/');
         }
         return back()->withInput($request->only('email', 'remember'));
 
+    }
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('/');
     }
 }

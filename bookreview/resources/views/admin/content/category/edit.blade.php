@@ -22,7 +22,7 @@
 
                     <div class="">
                         <label for="validationDefault04">Danh mục cha</label>
-                        <select class="form-control" id="validationDefault04" name="category_id">
+                        <select class="form-control" id="validationDefault04" name="category_parent_id">
                             <option value="0">Không có danh mục cha</option>
                             @include("admin.content.review.category_selected_option", ["categories"=>$categories, "level"=>0, "item"=>$item])
                         </select>

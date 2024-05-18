@@ -14,12 +14,6 @@
                         <label for="menuName">Tên menu</label>
                         <input type="text" class="form-control" id="menuName" name="menu_name" placeholder="Nhập tên menu...">
                     </div>
-
-                    <div class="">
-                        <label for="menu-url">url</label>
-                        <input type="text" class="form-control" id="menu-url" name="menu_url" placeholder="Nhập url của menu..." >
-                    </div>
-
                     <div class="">
                         <label for="validationDefault04">menu cha</label>
                         <select class="form-control" id="validationDefault04" name="menu_parent_id">

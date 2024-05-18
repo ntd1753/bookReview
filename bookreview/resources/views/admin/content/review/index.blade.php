@@ -29,7 +29,7 @@
                         </div>
                         @include("admin.content.review.review_modal",["reviews"=>$reviews])
 
-                        {{ $reviews->onEachSide(5)->links()}}
+                        {{ $reviews-> links('vendor.pagination.bootstrap-4')}}
                     </div>
                 </div>
             </div>

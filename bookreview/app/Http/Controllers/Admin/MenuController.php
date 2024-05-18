@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Menu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class MenuController extends Controller
 {
@@ -26,7 +27,7 @@ class MenuController extends Controller
         $input = $request->all();
         $menu = new Menu();
         $menu["menu_name"] = $input["menu_name"];
-        $menu["menu_url"] = $input["menu_url"];
+        $menu["menu_url"] = Str::slug($input["menu_name"]);
         $menu["menu_parent_id"] = $input["menu_parent_id"];
         $menu->save();
         return redirect()->route("admin.menu.index");
@@ -42,7 +43,8 @@ class MenuController extends Controller
         if($item){
             $input = $request->all();
             $item["menu_name"] = $input["menu_name"];
-            $item["menu_url"] = $input["menu_url"];
+            $item["menu_url"] = Str::slug($input["menu_name"]);
+
             $item["menu_parent_id"] = $input["menu_parent_id"];
             $item->save();
         }

@@ -75,6 +75,8 @@ Route::group(['prefix' => 'dashboard','middleware' => ['auth:web']], function ()
     Route::get('/delete/{id}', [App\Http\Controllers\User\ReviewController::class, 'destroy'])->name('user.review.destroy'); // delete category });
 });
 
-Route::post('/logout', [App\Http\Controllers\User\UserController::class,"logout"])->name("logout");
+Route::get('/logout', [App\Http\Controllers\User\UserController::class,"logout"])->name("logout");
 Route::get('/', [App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('frontend.home'); // delete category });
 Route::get("/post-detail/{id}",[App\Http\Controllers\Frontend\HomeController::class, 'detail'])->name('frontend.detail');
+Route::get("/search",[App\Http\Controllers\Frontend\HomeController::class, 'search'])->name('frontend.search');
+Route::get("/menu/{url}/{id}",[App\Http\Controllers\Frontend\HomeController::class, 'searchMenu'])->name('frontend.menu');
